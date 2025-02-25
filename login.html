@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Woody Woodpecker</title>
+    <title>Login - Woody Woodpecker</title>
     <style>
         /* Estilos gerais */
         body {
@@ -48,12 +48,12 @@
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             max-width: 800px;
-            width: 90%; /* Ajuste para melhorar o espaçamento lateral */
+            width: 90%;
             display: flex;
             align-items: center;
             position: relative;
             margin-top: 40px;
-            margin-bottom: 40px; /* Adicionado para espaçamento inferior */
+            margin-bottom: 40px;
         }
 
         /* Imagem do Pica-Pau */
@@ -150,9 +150,60 @@
         .nav-links a:hover {
             text-decoration: underline;
         }
+
+        /* Animação de fade-in para o conteúdo */
+        .container, h1, .balao {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .container {
+            animation-delay: 0.5s;
+        }
+
+        h1 {
+            animation-delay: 0.7s;
+        }
+
+        .balao {
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Decorações laterais */
+        .decoracao-lateral {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 150px; /* Largura das decorações laterais */
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+
+        .decoracao-lateral.esquerda {
+            left: 0;
+            background-size: contain;
+        }
+
+        .decoracao-lateral.direita {
+            right: 0;
+            background-size: contain;
+        }
     </style>
 </head>
 <body>
+    <!-- Decorações laterais -->
+    <div class="decoracao-lateral esquerda"></div>
+    <div class="decoracao-lateral direita"></div>
+
     <!-- Header -->
     <header>
         <a href="index.html">Home</a>
@@ -164,56 +215,62 @@
     <!-- Container principal -->
     <div class="container">
         <!-- Imagem do Pica-Pau -->
-        <img src="imagem/3.png" alt="Pica-Pau" class="picapau-img">
+        <img src="imagem/4.jfif" alt="Pica-Pau" class="picapau-img">
 
         <!-- Balão de fala -->
-        <div class="balao">"Hahaha! Venha se divertir comigo!"</div>
+        <div class="balao">"Hahaha! Sua hora de continuar a diversão!"</div>
 
-        <!-- Formulário de cadastro -->
+        <!-- Formulário de login -->
         <div>
-            <h1>Cadastro</h1>
-            <form id="cadastroForm">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
-
+            <h1>Login</h1>
+            <form id="loginForm">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
 
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" name="senha" required>
 
-                <button type="submit">Cadastrar</button>
+                <button type="submit">Logar</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Função para validar e cadastrar usuário
-        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+        // Função para verificar login
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Impede o envio do formulário
 
             // Captura os valores dos campos
-            const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
             const senha = document.getElementById('senha').value;
 
-            // Verificar se o e-mail já foi cadastrado
-            if (localStorage.getItem(email)) {
-                alert('E-mail já cadastrado!');
+            // Verificar se o usuário existe no localStorage
+            const usuario = localStorage.getItem(email);
+
+            if (usuario) {
+                const usuarioObj = JSON.parse(usuario);
+
+                // Verificar senha
+                if (usuarioObj.senha === senha) {
+                    alert(`Bem-vindo, ${usuarioObj.nome}!`);
+                    // Redireciona para a página principal ou painel de usuário
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Senha incorreta!');
+                }
             } else {
-                // Criar um objeto para armazenar no localStorage
-                const usuario = { nome, email, senha };
-
-                // Salvar o usuário no localStorage
-                localStorage.setItem(email, JSON.stringify(usuario));
-
-                // Exibir mensagem de sucesso
-                alert('Cadastro realizado com sucesso!');
-
-                // Limpar o formulário após o cadastro
-                document.getElementById('cadastroForm').reset();
+                alert('E-mail não encontrado!');
             }
         });
+
+        // Função para salvar um usuário no localStorage (para fins de teste)
+        function cadastrarUsuario(nome, email, senha) {
+            const usuario = { nome, email, senha };
+            localStorage.setItem(email, JSON.stringify(usuario));
+        }
+
+        // Exemplo de cadastro de um usuário (pode ser removido depois de testar)
+        // cadastrarUsuario('Pica-Pau', 'pica@woody.com', 'woody123');
     </script>
 </body>
 </html>
