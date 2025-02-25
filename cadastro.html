@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Woody Woodpecker</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            background-color: #880606;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Estilos do cabeçalho */
+        header {
+            color: #000000;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            background-color: #e7e7e7;
+        }
+
+        header a {
+            display: inline-block;
+            margin: 10px 20px;
+            color: rgb(0, 7, 209);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        header a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Container principal */
+        .container {
+            background-color: #e7e7e7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%; /* Ajuste para melhorar o espaçamento lateral */
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 40px;
+            margin-bottom: 40px; /* Adicionado para espaçamento inferior */
+        }
+
+        /* Imagem do Pica-Pau */
+        .picapau-img {
+            width: 180px;
+            height: auto;
+            margin-right: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Balão de fala */
+        .balao {
+            position: absolute;
+            top: -50px;
+            left: 220px;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-style: italic;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .balao::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #fff transparent transparent;
+        }
+
+        /* Título */
+        h1 {
+            color: #000;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        form label {
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        form input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        form button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05); /* Aumenta o tamanho do botão ao passar o mouse */
+        }
+
+        /* Links de navegação */
+        .nav-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .nav-links a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animação de fade-in para o conteúdo */
+        .container, h1, .balao {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .container {
+            animation-delay: 0.5s;
+        }
+
+        h1 {
+            animation-delay: 0.7s;
+        }
+
+        .balao {
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Decorações laterais */
+        .decoracao-lateral {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 150px; /* Largura das decorações laterais */
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+
+        .decoracao-lateral.esquerda {
+            left: 0;
+            background-size: contain;
+        }
+
+        .decoracao-lateral.direita {
+            right: 0;
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorações laterais -->
+    <div class="decoracao-lateral esquerda"></div>
+    <div class="decoracao-lateral direita"></div>
+
+    <!-- Header -->
+    <header>
+        <a href="home.html">Home</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="sobre.html">Sobre</a>
+    </header>
+
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Imagem do Pica-Pau -->
+        <img src="Imagem/3.png" alt="Pica-Pau" class="picapau-img">
+
+        <!-- Balão de fala -->
+        <div class="balao">"Hahaha! Venha se divertir comigo!"</div>
+
+        <!-- Formulário de cadastro -->
+        <div>
+            <h1>Cadastro</h1>
+            <form id="cadastroForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Função para validar o formulário
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Captura os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Validação simples
+            if (nome && email && senha) {
+                alert(`Cadastro realizado com sucesso!\nNome: ${nome}\nE-mail: ${email}`);
+                // Limpa o formulário após o cadastro
+                document.getElementById('cadastroForm').reset();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
+</body>
+</html>
